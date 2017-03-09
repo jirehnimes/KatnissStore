@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use Validator;
+use Hash;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -24,13 +25,6 @@ class AuthController extends Controller
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     /**
-     * Where to redirect users after login / registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/';
-
-    /**
      * Create a new authentication controller instance.
      *
      * @return void
@@ -49,9 +43,12 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'fname'  => 'required|max:255',
+            'lname'  => 'required|max:255',
+            'email'  => 'required|email|max:255|unique:users',
+            'pword'  => 'required|min:6|confirmed',
+            'bdate'  => 'required|date',
+            'gender' => 'required'
         ]);
     }
 
@@ -64,9 +61,22 @@ class AuthController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'first_name' => $data['fname'],
+            'last_name'  => $data['lname'],
+            'email'      => $data['email'],
+            'password'   => Hash::make($data['pword']),
+            'birthdate'  => $data['bdate'],
+            'gender'     => $data['gender']
         ]);
+    }
+
+    protected function authenticated($request, $user)
+    {
+        if ($user->is_admin === '1') {
+            return redirect()->intended('/admin/home');
+            exit();
+        }
+
+        return redirect()->intended('/home');
     }
 }
