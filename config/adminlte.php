@@ -123,6 +123,11 @@ return [
         ],
         'RECORDS',
         [
+            'text' => 'Orders',
+            'url'  => 'admin/product',
+            'icon' => 'user',
+        ],
+        [
             'text' => 'Products',
             'url'  => 'admin/product',
             'icon' => 'user',
