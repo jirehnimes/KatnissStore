@@ -25,4 +25,5 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::resource('home', 'Admin\HomeController');
+    Route::resource('product', 'Admin\ProductController');
 });

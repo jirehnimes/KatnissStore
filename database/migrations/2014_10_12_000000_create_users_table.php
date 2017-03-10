@@ -18,6 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('last_name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('address');
+            $table->string('shipping_address');
             $table->date('birthdate');
             $table->enum('gender', ['m', 'f']);
             $table->enum('is_admin', [0, 1])->default(0);
