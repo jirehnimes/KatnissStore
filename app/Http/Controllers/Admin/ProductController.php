@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Product;
+use App\Category;
+
 class ProductController extends Controller
 {
     /**
@@ -16,7 +19,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('admin/createProduct');
+        return view('admin/product');
     }
 
     /**
@@ -26,7 +29,15 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $aCats = Category::all();
+
+        return view(
+            'admin/createProduct', 
+            [
+                'aStatus' => 'New',
+                'aCats'   => $aCats
+            ]
+        );
     }
 
     /**
@@ -37,7 +48,20 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $oInput = $request->all();
+
+        $oProduct = new Product;
+        $oProduct->name        = $oInput['name'];
+        $oProduct->category_id = $oInput['category'];
+        $oProduct->description = $oInput['description'];
+        $oProduct->price       = $oInput['price'];
+        $oProduct->quantity    = $oInput['quantity'];
+
+        if ($oProduct->save()) {
+            return redirect('/admin/product')->with('ok', 'Product successfully saved.');
+        }
+
+        return redirect('/admin/product/create')->with('error', 'Product save failed.');
     }
 
     /**
@@ -59,7 +83,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin/createProduct', ['aStatus' => 'Edit']);
     }
 
     /**

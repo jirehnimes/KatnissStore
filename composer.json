@@ -7,7 +7,8 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
-        "jeroennoten/laravel-adminlte": "^1.19"
+        "jeroennoten/laravel-adminlte": "^1.19",
+        "yajra/laravel-datatables-oracle": "6.x"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

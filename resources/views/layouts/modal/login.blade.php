@@ -56,8 +56,8 @@
                         @endif
                     </div>
                     <div class="row">
-                        <div class="col-xs-8">
-                            <div class="checkbox icheck">
+                        <div class="">
+                            <div class="checkbox icheck col-xs-8">
                                 <label>
                                     <input type="checkbox" name="remember"> {{ trans('adminlte::adminlte.remember_me') }}
                                 </label>

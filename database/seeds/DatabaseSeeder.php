@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $aSeeders = array(
         	UsersSeeder::class,
+            CategoriesSeeder::class,
     	);
 
         foreach ($aSeeders as $oValue) {
