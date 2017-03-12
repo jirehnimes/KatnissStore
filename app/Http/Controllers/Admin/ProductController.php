@@ -83,7 +83,17 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        return view('admin/createProduct', ['aStatus' => 'Edit']);
+        $aProd = Product::find($id);
+        $aCats = Category::all();
+
+        return view(
+            'admin/createProduct', 
+            [
+                'aStatus' => 'Edit',
+                'aCats'   => $aCats,
+                'aProd'   => $aProd
+            ]
+        );
     }
 
     /**

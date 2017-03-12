@@ -24,23 +24,23 @@
 				<div class="row">
 					<div class="form-group col-sm-6">
 		              	<label for="name">Name</label>
-		              	<input type="text" class="form-control" id="name" name="name" value="" required>
+		              	<input type="text" class="form-control" id="name" name="name" value="{{ isset($aProd) ? $aProd['name'] : '' }}" required>
 		            </div>
 		            <div class="form-group col-sm-6">
 		              	<label for="price">Price</label>
-	              		<input type="text" class="form-control" id="price" name="price" value="" required>
+	              		<input type="text" class="form-control" id="price" name="price" value="{{ isset($aProd) ? $aProd['price'] : '' }}" required>
 		            </div>
 				</div>
 				<div class="row">
 					 <div class="form-group col-sm-6">
 		              	<label>Description</label>
-		              	<textarea class="form-control" rows="5" name="description" style="resize:none"></textarea>
+		              	<textarea class="form-control" rows="5" name="description" style="resize:none">{{ isset($aProd) ? $aProd['description'] : '' }}</textarea>
 		            </div>
 		            <div class="form-group col-sm-6">
 		            	<div class="row">
 		            		<div class="col-xs-12">
 		            			<label for="quantity">Quantity</label>
-	              				<input type="number" class="form-control" id="quantity" name="quantity" value="" required>
+	              				<input type="number" class="form-control" id="quantity" name="quantity" value="{{ isset($aProd) ? $aProd['quantity'] : '' }}" required>
 		            		</div>
 		            	</div>
 		            	<div class="row">
@@ -57,7 +57,9 @@
 				</div>
 
 				<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-				<!-- <input type="hidden" name="_method" value="PUT"> -->
+				@if (isset($aProd))
+				<input type="hidden" name="_method" value="PUT">
+				@endif
 
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>

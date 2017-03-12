@@ -70,7 +70,7 @@ $(function() {
         },
         columns: [
             {data: 'name', name: 'name'},
-            {data: 'category_id', name: 'category_id'},
+            {data: 'category.name', name: 'category.name'},
             {data: 'description', name: 'description'},
             {data: 'price', render: function (data, type, row) {
             	return 'Php '+data;
@@ -87,6 +87,11 @@ $(function() {
             {data: 'action', defaultContent: '<button class="btn btn-success btn-flat btnEdit"><i class="fa fa-edit"></i></button>&nbsp;<button class="btn btn-danger btn-flat btnDel"><i class="fa fa-trash"></i></button>'},
         ],
         order: [ [5, 'desc'] ]
+    });
+
+    $('#product tbody').on('click', '.btnEdit', function () {
+        var data = table.row($(this).parents('tr')).data();
+        window.location.replace('/admin/product/'+data.id+'/edit');
     });
 });
 </script>
