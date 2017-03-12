@@ -23,7 +23,7 @@
 				<table id="table_all" class="display" cellspacing="0" width="100%">
 			        <thead>
 			            <tr>
-			                <th>Image</th>
+			                <!-- <th>Image</th> -->
 			                <th>Name</th>
 			                <th>Category</th>
 			                <th>Description</th>
@@ -36,7 +36,7 @@
 			        </thead>
 			        <tfoot>
 			            <tr>
-			            	<th>Image</th>
+			            	<!-- <th>Image</th> -->
 			                <th>Name</th>
 			                <th>Category</th>
 			                <th>Description</th>
@@ -56,4 +56,38 @@
 			<input type="hidden" name="_method" value="DELETE">
 		</form>
 	</section>
+@stop
+
+@section('js')
+<script type="text/javascript">
+$(function() {
+	var table = $('#table_all').DataTable({
+        processing: true,
+        // serverSide: true,
+        ajax: {
+            url: '{{ route("datatables.admin.product") }}',
+            type: 'GET'
+        },
+        columns: [
+            {data: 'name', name: 'name'},
+            {data: 'category_id', name: 'category_id'},
+            {data: 'description', name: 'description'},
+            {data: 'price', render: function (data, type, row) {
+            	return 'Php '+data;
+            }},
+            {data: 'quantity', render: function (data, type, row) {
+            	return data+' pc/s';
+            }},
+            {data: 'created_at', render: function (data, type, row) {
+            	return moment(data).format('MMMM DD, YYYY');
+            }},
+            {data: 'updated_at', render: function (data, type, row) {
+            	return moment(data).format('MMMM DD, YYYY');
+            }},
+            {data: 'action', defaultContent: '<button class="btn btn-success btn-flat btnEdit"><i class="fa fa-edit"></i></button>&nbsp;<button class="btn btn-danger btn-flat btnDel"><i class="fa fa-trash"></i></button>'},
+        ],
+        order: [ [5, 'desc'] ]
+    });
+});
+</script>
 @stop

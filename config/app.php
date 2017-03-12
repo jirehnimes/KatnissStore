@@ -157,6 +157,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         JeroenNoten\LaravelAdminLte\ServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class
 
     ],
 

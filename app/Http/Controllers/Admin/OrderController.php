@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Datatables;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class HomeController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin/order');
     }
 
     /**
@@ -26,7 +26,7 @@ class HomeController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin/createOrder');
     }
 
     /**

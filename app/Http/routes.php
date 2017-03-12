@@ -25,5 +25,10 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::resource('home', 'Admin\HomeController');
+    Route::resource('order', 'Admin\OrderController');
     Route::resource('product', 'Admin\ProductController');
+});
+
+Route::group(['prefix' => 'datatables'], function () {
+    Route::get('admin/product', ['as'=>'datatables.admin.product', 'uses'=>'Datatable\Admin\ProductController@all']);
 });
