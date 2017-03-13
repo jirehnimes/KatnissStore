@@ -32,7 +32,7 @@ class ProductController extends Controller
         $aCats = Category::all();
 
         return view(
-            'admin/createProduct', 
+            'admin/createProduct',
             [
                 'aStatus' => 'New',
                 'aCats'   => $aCats
@@ -56,6 +56,16 @@ class ProductController extends Controller
         $oProduct->description = $oInput['description'];
         $oProduct->price       = $oInput['price'];
         $oProduct->quantity    = $oInput['quantity'];
+
+        if ($request->file('image') !== NULL) {
+            $mImage = $this->doUpload($request->file('image'));
+
+            if ($mImage !== false) {
+                $oProduct->image = $mImage;
+            } else {
+                return redirect('/admin/product/create')->with('error', 'Product image upload failed.');
+            }
+        }
 
         if ($oProduct->save()) {
             return redirect('/admin/product')->with('ok', 'Product successfully saved.');
@@ -83,7 +93,17 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        return view('admin/createProduct', ['aStatus' => 'Edit']);
+        $aCats = Category::all();
+        $aProduct = Product::find($id);
+
+        return view(
+            'admin/createProduct',
+            [
+                'aStatus' => 'Edit',
+                'aCats'   => $aCats,
+                'aProd'   => $aProduct
+            ]
+        );
     }
 
     /**
@@ -95,7 +115,20 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $oInput = $request->all();
+
+        $oProduct = Product::find($id);
+        $oProduct->name        = $oInput['name'];
+        $oProduct->category_id = $oInput['category'];
+        $oProduct->description = $oInput['description'];
+        $oProduct->price       = $oInput['price'];
+        $oProduct->quantity    = $oInput['quantity'];
+
+        if ($oProduct->save()) {
+            return redirect('/admin/product')->with('ok', 'Product successfully updated.');
+        }
+
+        return redirect('/admin/product/'.$id.'/edit')->with('error', 'Product update failed.');
     }
 
     /**
@@ -106,6 +139,22 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $aProduct = Product::find($id);
+        $aProduct->delete();
+
+        return redirect('/admin/product')->with('ok', 'Product deleted.');
+    }
+
+    private function doUpload($oFile)
+    {
+        $sFileExt = $oFile->guessExtension();
+        $sDestinationPath = 'storage/images/products/';
+        $sImageName = 'product_'.date('ymdHis').'.'.$sFileExt;
+
+        if($oFile->move($sDestinationPath, $sImageName)) {
+            return $sImageName;
+        }
+
+        return false;
     }
 }

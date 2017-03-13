@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $aCats = \App\Category::all();
+    return view('welcome', ['aCats' => $aCats]);
 });
 
 Route::auth();
