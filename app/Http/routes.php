@@ -13,12 +13,14 @@
 
 Route::get('/', function () {
     $aCats = \App\Category::all();
-    return view('welcome', ['aCats' => $aCats]);
+    return view('main', ['aCats' => $aCats]);
 });
 
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('/products/{category}', 'ProductsController@display');
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('/home', 'HomeController');

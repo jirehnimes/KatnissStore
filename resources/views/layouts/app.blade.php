@@ -12,9 +12,25 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
 
     <!-- Styles -->
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="{{ asset('bootstrap-3.3.7-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('bootstrap-3.3.7-dist/css/bootstrap-theme.min.css') }}">
+
+    <!-- Slick.js -->
+    <link rel="stylesheet" href="{{ asset('slick-1.6.0/slick/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('slick-1.6.0/slick/slick-theme.css') }}">
+
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
+
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+
+    <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
+
+    <!-- Bootstrap -->
+    <script src="{{ asset('bootstrap-3.3.7-dist/js/bootstrap.min.js') }}"></script>
+
+    <!-- Slick.js -->
+    <script src="{{ asset('slick-1.6.0/slick/slick.min.js') }}"></script>
 
     <style>
         body {
@@ -30,7 +46,24 @@
             color: white;
             height: 100px;
         }
+
+        .modal {
+            border-radius: 0;
+        }
     </style>
+
+    <script type="text/javascript">
+        $(function() {
+            if (typeof(Storage) !== 'undefined') {
+                if (sessionStorage.cart) {
+                    sCart = JSON.parse(sessionStorage.cart);
+                    $('#app-layout .nav.navbar-nav .cartCnt').text(sCart.length);
+                }
+            } else {
+                console.error('No web localstorage in this browser.');
+            }
+        });
+    </script>
 </head>
 <body id="app-layout">
     <nav class="navbar navbar-default navbar-static-top">
@@ -54,11 +87,18 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
+                    @foreach ($aCats as $aCat)
+                        <li><a href="{{ url('/products/'.$aCat->name) }}">{{ $aCat->name }}</a></li>
+                    @endforeach
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <hr>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
+                    <li><a href="" data-toggle="modal" data-target="#cartModal"><i class="fa fa-btn fa-shopping-cart"></i><span class="cartCnt">0</span></a></li>
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="" data-toggle="modal" data-target="#loginModal">Login/Register</a></li>
@@ -74,21 +114,35 @@
                         <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                     @endif
                 </ul>
+
+                <!-- <form class="navbar-form navbar-right">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form> -->
             </div>
         </div>
     </nav>
 
     @yield('content')
 
+    <br>
+
     <footer>
-        Footer
+        <center>
+            Katniss Store 2017
+        </center>
     </footer>
 
     @include('layouts.modal.login')
+    @include('layouts.modal.cart')
 
     <!-- JavaScripts -->
-    <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
-    <script src="{{ asset('bootstrap-3.3.7-dist/js/bootstrap.min.js') }}"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
 </html>

@@ -1,5 +1,3 @@
-@extends('adminlte::master')
-
 <style type="text/css">
     #loginModal .modal-content {
         width: 50vw;

@@ -1,0 +1,8 @@
+#app-layout .navbar.navbar-default * {
+	background-color: rgb(0, 62, 163) !important;
+	color: white;
+}
+
+#app-layout footer {
+	
+}
