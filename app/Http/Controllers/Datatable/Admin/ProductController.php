@@ -16,7 +16,6 @@ class ProductController extends Controller
     public function all()
     {
     	$aProd = Product::with('category')->get();
-    	
     	return Datatables::of($aProd)->make(true);
     }
 }

@@ -23,7 +23,7 @@
 				<table id="table_all" class="display" cellspacing="0" width="100%">
 			        <thead>
 			            <tr>
-			                <!-- <th>Image</th> -->
+			                <th>Image</th>
 			                <th>Name</th>
 			                <th>Category</th>
 			                <th>Description</th>
@@ -36,7 +36,7 @@
 			        </thead>
 			        <tfoot>
 			            <tr>
-			            	<!-- <th>Image</th> -->
+			            	<th>Image</th>
 			                <th>Name</th>
 			                <th>Category</th>
 			                <th>Description</th>
@@ -60,6 +60,10 @@
 
 @section('js')
 <script type="text/javascript">
+function errorImg(that) {
+	$(that).attr('src', '/images/default-thumbnail.jpg');
+}
+
 $(function() {
 	var table = $('#table_all').DataTable({
         processing: true,
@@ -69,6 +73,9 @@ $(function() {
             type: 'GET'
         },
         columns: [
+        	{data: 'image', render: function (data, type, row) {
+            	return '<img src="/storage/images/products/'+data+'" class="img-responsive" style="height:auto;width:100%;" onerror="errorImg(this)">';
+            }},
             {data: 'name', name: 'name'},
             {data: 'category.name', name: 'category.name'},
             {data: 'description', name: 'description'},
@@ -92,6 +99,13 @@ $(function() {
     $('#product tbody').on('click', '.btnEdit', function () {
         var data = table.row($(this).parents('tr')).data();
         window.location.replace('/admin/product/'+data.id+'/edit');
+    });
+
+    $('#product tbody').on('click', '.btnDel', function () {
+    	var form = $('#product #delete');
+    	var data = table.row($(this).parents('tr')).data();
+    	form.attr('action', '/admin/product/'+data.id);
+    	form.submit();
     });
 });
 </script>
