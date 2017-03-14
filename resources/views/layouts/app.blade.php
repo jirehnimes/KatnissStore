@@ -41,12 +41,6 @@
             margin-right: 6px;
         }
 
-        footer {
-            background-color: rgb(52,52,52);
-            color: white;
-            height: 100px;
-        }
-
         .modal {
             border-radius: 0;
         }
@@ -66,16 +60,13 @@
     </script>
 </head>
 <body id="app-layout">
-    <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
-            <div class="navbar-header">
+    <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container-fluid">
+            <div class="navbar-header" >
 
                 <!-- Collapsed Hamburger -->
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                    <i class="fa fa-bars"></i>
                 </button>
 
                 <!-- Branding Image -->
@@ -129,9 +120,9 @@
         </div>
     </nav>
 
-    @yield('content')
-
-    <br>
+    <section id="content">
+        @yield('content')
+    </section>
 
     <footer>
         <center>
