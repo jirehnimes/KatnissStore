@@ -55,7 +55,26 @@ $(function() {
             <h4 class="modal-title">Cart</h4>
         </div>
         <div class="modal-body">
-            
+            <table id="tableCart" class="display table table-hover" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>

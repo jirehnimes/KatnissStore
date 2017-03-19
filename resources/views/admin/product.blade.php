@@ -20,7 +20,9 @@
 				</a>
 			</div>
 			<div class="box-body">
-				<table id="table_all" class="display" cellspacing="0" width="100%">
+				<table id="table_all" class="display table table-hover" cellspacing="0" width="100%">
+					<col width="10%">
+
 			        <thead>
 			            <tr>
 			                <th>Image</th>

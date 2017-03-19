@@ -8,6 +8,9 @@
 
 	.prodPanel:hover {
 		border: 1px solid black;
+		cursor: pointer;
+		border-color: white;
+		border-radius: 5px;
 	}
 
 	.prodPanel img {

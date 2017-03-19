@@ -77,6 +77,6 @@ class AuthController extends Controller
             exit();
         }
 
-        return redirect()->intended('/home');
+        return redirect()->intended('/');
     }
 }
