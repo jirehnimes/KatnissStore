@@ -17,9 +17,10 @@ class ProductController extends Controller
     {
     	$oData = $request->all();
 
-    	$aProd = Product::whereIn('id', $oData['cartItems'])
+		$aProd = Product::whereIn('id', $oData['cartItems'])
     		->with('category')
     		->get();
+    	
     	return Datatables::of($aProd)->make(true);
     }
 }
