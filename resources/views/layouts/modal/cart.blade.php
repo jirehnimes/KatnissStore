@@ -1,24 +1,3 @@
-<style type="text/css">
-    #cartModal .modal-content {
-        width: 50vw;
-        top: 50vh;
-        left: 50vw;
-        transform: translate(-50%,-50%);
-    }
-
-    @media screen and (max-width: 600px) {
-        #cartModal .modal-content {
-            width: 100vw;
-            top: 0;
-        }
-    }
-
-    #cartModal .modal-body {
-        padding: 0;
-        margin: 0;
-    }
-</style>
-
 <script type="text/javascript">
 function errorImg(that) {
     $(that).attr('src', '/images/default-thumbnail.jpg');

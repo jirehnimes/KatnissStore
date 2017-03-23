@@ -49,8 +49,32 @@
             margin-right: 6px;
         }
 
-        .modal {
+        .modal .modal-content {
             border-radius: 0;
+            width: 50vw;
+            top: 50vh;
+            left: 50vw;
+            transform: translate(-50%,-50%);
+        }
+
+        .modal .modal-content .modal-header {
+            background-color: rgb(0, 62, 163);
+            color: white;
+        }
+
+        .modal .modal-content .modal-body {
+            background-color: rgb(51, 153, 255);
+        }
+
+        .modal .modal-content .modal-footer {
+            background-color: rgb(52, 52, 52);
+        }
+
+        @media screen and (max-width: 600px) {
+            .modal .modal-content {
+                width: 100vw;
+                top: 0;
+            }
         }
     </style>
 
@@ -125,15 +149,16 @@
                     @if (Auth::guest())
                         <li><a href="" data-toggle="modal" data-target="#loginModal">Login/Register</a></li>
                     @else
-                        <!-- <li class="dropdown">
+                        <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                <i class="fa fa-user-circle-o"></i>&nbsp;&nbsp;&nbsp;{{ Auth::user()->first_name.' '.Auth::user()->last_name }} <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
+                                <li><a href="">Profile</a></li>
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
-                        </li> -->
-                        <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                        </li>
                     @endif
                 </ul>
 
