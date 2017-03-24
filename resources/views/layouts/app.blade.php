@@ -81,22 +81,24 @@
     <script type="text/javascript">
         $(function() {
             if (typeof(Storage) !== 'undefined') {
-                sCart = '';
-
                 if (sessionStorage.cart) {
-                    sCart = JSON.parse(sessionStorage.cart);
+                    $('#app-layout .nav.navbar-nav .cartCnt').text(JSON.parse(sessionStorage.cart).length);
                 }
+
+                var oAjax = {
+                    url: '{{ route("datatables.product.cart") }}',
+                    type: 'GET',
+                    data: function(d) {
+                        d.cartItems = '';
+                        if (sessionStorage.cart) {
+                            d.cartItems = JSON.parse(sessionStorage.cart);
+                        }
+                    }
+                };
 
                 var cartTable = $('#tableCart').DataTable({
                     processing: true,
-                    // serverSide: true,
-                    ajax: {
-                        url: '{{ route("datatables.product.cart") }}',
-                        type: 'GET',
-                        data: {
-                            cartItems: sCart
-                        }
-                    },
+                    ajax: oAjax,
                     columns: [
                         {data: 'name', name: 'name'},
                         {data: 'category.name', name: 'category.name'},
@@ -104,17 +106,13 @@
                             return 'Php '+data;
                         }},
                         {defaultContent: '<input type="number" class="form-control" name="quantity[]" value="0">'},
-                        {data: 'action', defaultContent: '<button class="btn btn-success btn-flat btnEdit"><i class="fa fa-edit"></i></button>&nbsp;<button class="btn btn-danger btn-flat btnDel"><i class="fa fa-trash"></i></button>'},
+                        {data: 'action', defaultContent: '<button class="btn btn-danger btn-flat btnDel"><i class="fa fa-trash"></i></button>'},
                     ]
                 });
 
-                $('#app-layout .nav.navbar-nav .cartCnt').text(sCart.length);
-
                 $('.cartIcon').click(function() {
-                    // cartTable.ajax.reload();
-                    cartTable.fnClearTable();                            
-                    // cartTable.fnAddData(sCart);                            
-                    cartTable.fnDraw();
+                    cartTable.ajax.reload();
+                    cartTable.draw();
                 });
             } else {
                 console.error('No web localstorage in this browser.');
