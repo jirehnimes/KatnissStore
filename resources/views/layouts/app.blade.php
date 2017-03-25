@@ -23,6 +23,7 @@
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/breadcrumb.css') }}">
 
     <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
 
@@ -38,7 +39,11 @@
     <!-- DataTables -->
     <script src="{{ asset('datatables/datatables.min.js') }}"></script>
 
+    <!-- Moment.js -->
     <script src="{{ asset('moment/min/moment.min.js') }}"></script>
+
+    <!-- Custom -->
+    <script src="{{ asset('js/cartModal.js') }}"></script>
 
     <style>
         body {
@@ -47,6 +52,13 @@
 
         .fa-btn {
             margin-right: 6px;
+        }
+
+        div#breadcrumb {
+        }
+
+        div#breadcrumb * {
+            color: white;
         }
 
         .modal .modal-content {
@@ -77,48 +89,6 @@
             }
         }
     </style>
-
-    <script type="text/javascript">
-        $(function() {
-            if (typeof(Storage) !== 'undefined') {
-                if (sessionStorage.cart) {
-                    $('#app-layout .nav.navbar-nav .cartCnt').text(JSON.parse(sessionStorage.cart).length);
-                }
-
-                var oAjax = {
-                    url: '{{ route("datatables.product.cart") }}',
-                    type: 'GET',
-                    data: function(d) {
-                        d.cartItems = '';
-                        if (sessionStorage.cart) {
-                            d.cartItems = JSON.parse(sessionStorage.cart);
-                        }
-                    }
-                };
-
-                var cartTable = $('#tableCart').DataTable({
-                    processing: true,
-                    ajax: oAjax,
-                    columns: [
-                        {data: 'name', name: 'name'},
-                        {data: 'category.name', name: 'category.name'},
-                        {data: 'price', render: function (data, type, row) {
-                            return 'Php '+data;
-                        }},
-                        {defaultContent: '<input type="number" class="form-control" name="quantity[]" value="0">'},
-                        {data: 'action', defaultContent: '<button class="btn btn-danger btn-flat btnDel"><i class="fa fa-trash"></i></button>'},
-                    ]
-                });
-
-                $('.cartIcon').click(function() {
-                    cartTable.ajax.reload();
-                    cartTable.draw();
-                });
-            } else {
-                console.error('No web localstorage in this browser.');
-            }
-        });
-    </script>
 </head>
 <body id="app-layout">
     <nav class="navbar navbar-inverse navbar-static-top">

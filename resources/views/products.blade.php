@@ -50,10 +50,11 @@ $(function() {
 			if (sessionStorage.cart) {
 				sCart = JSON.parse(sessionStorage.cart);
 				if ($.inArray(_prodVal, sCart) !== -1) {
+					alert('Item is already belong to the cart.');
 					return false;
 				}
 			}
-			sCart.push(_prodVal);
+			sCart.push({id : _prodVal, qty : 0});
 			$('#app-layout .nav.navbar-nav .cartCnt').text(sCart.length);
 	    	sessionStorage.setItem('cart', JSON.stringify(sCart));
 		} else {

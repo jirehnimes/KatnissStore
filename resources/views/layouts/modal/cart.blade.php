@@ -1,32 +1,5 @@
-<script type="text/javascript">
-function errorImg(that) {
-    $(that).attr('src', '/images/default-thumbnail.jpg');
-}
-
-$(function() {
-    $('.prodPanel .btn-success').click(function() {
-        var _prodVal = $(this).closest('.prodPanel').find('input[name="id"]').val();
-
-        if (typeof(Storage) !== 'undefined') {
-            sCart = [];
-            if (sessionStorage.cart) {
-                sCart = JSON.parse(sessionStorage.cart);
-                if ($.inArray(_prodVal, sCart) !== -1) {
-                    return false;
-                }
-            }
-            sCart.push(_prodVal);
-            $('#app-layout .nav.navbar-nav .cartCnt').text(sCart.length);
-            sessionStorage.setItem('cart', JSON.stringify(sCart));
-        } else {
-            console.error('No web localstorage in this browser.');
-        }
-    });
-});
-</script>
-
 <div id="cartModal" class="modal modal-default fade" role="dialog">
-    <form action="" method="POST">
+    <form action="{{ url('order') }}" method="POST">
         <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
         <div class="modal-content">
             <div class="modal-header">
@@ -61,7 +34,7 @@ $(function() {
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-outline">Checkout</button>
+                <button type="submit" class="btn btn-outline">Checkout</button>
             </div>
         </div>
     </form>

@@ -38,6 +38,7 @@ class OrderController extends Controller
     {
         $oRequest = $request->all();
 
+        echo "string";
         echo "<pre>";
         var_dump($oRequest);
     }
