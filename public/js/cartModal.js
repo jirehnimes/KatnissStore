@@ -5,6 +5,8 @@ $(function() {
         var oCartCnt = $('#app-layout .nav.navbar-nav .cartCnt')
         var oCartModal = $('#cartModal');
 
+        var iAmtTotal = 5;
+
         // If sessionStorage.cart has data, display count of items
         if (sessionStorage.cart) {
             oCartCnt.text(JSON.parse(sessionStorage.cart).length);
@@ -15,15 +17,18 @@ $(function() {
             url: '/datatables/product/cart',
             type: 'GET',
             data: function(d) {
-                var _aCart = JSON.parse(sessionStorage.cart);
-                var _aTmpId = [];
-
                 d.cartItems = '';
-                if (sessionStorage.cart && _aCart.length !== 0) {
-                    _aCart.forEach(function(item, index) {
-                        _aTmpId.push(item.id);
-                    });
-                    d.cartItems = _aTmpId;
+
+                if (sessionStorage.cart) {
+                    var _aCart = JSON.parse(sessionStorage.cart);
+                    var _aTmpId = [];
+
+                    if (_aCart.length !== 0) {
+                        _aCart.forEach(function(item, index) {
+                            _aTmpId.push(item.id);
+                        });
+                        d.cartItems = _aTmpId;
+                    }
                 }
             }
         };
@@ -39,21 +44,26 @@ $(function() {
                     return 'Php '+data;
                 }},
                 {render: function(data, type, full, meta) {
-                    return '<input type="number" class="form-control" name="quantity[]" value="0">';
+                    return '<input type="number" class="form-control" name="quantity[]" value="1">';
                 }},
                 {defaultContent: '<button type="button" class="btn btn-danger btn-flat btnDel"><i class="fa fa-trash"></i></button>'},
             ],
             createdRow: function(row, data, index) {
                 var oThis = $(row);
                 var _aCart = JSON.parse(sessionStorage.cart);
+                var iPrice = parseFloat(data.price).toFixed(2);
 
                 _aCart.forEach(function(item, index) {
                     if (item.id == data.id) {
                         oThis.find('input[name="quantity[]"]').val(item.qty);
+                        iAmtTotal += item.qty * iPrice;
                     }
                 });
 
                 oThis.append('<input type="hidden" name="id[]" value="'+data.id+'">');
+            },
+            drawCallback: function(settings) {
+                calculateTotal();
             }
         });
 
@@ -76,6 +86,8 @@ $(function() {
             });
 
             sessionStorage.cart = JSON.stringify(aCart);
+            cartTable.ajax.reload();
+            cartTable.draw();
         });
 
         // To delete item in cart
@@ -96,6 +108,11 @@ $(function() {
             cartTable.ajax.reload();
             cartTable.draw();
         });
+
+        function calculateTotal() {
+            oCartModal.find('#total').text(parseFloat(iAmtTotal).toFixed(2));
+            iAmtTotal = 0;
+        }
     } else {
         console.error('No web localstorage in this browser.');
     }

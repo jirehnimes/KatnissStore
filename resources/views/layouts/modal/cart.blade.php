@@ -30,7 +30,20 @@
                     </tfoot>
                 </table>
                 <hr>
-                Total: Php <span id="total">0.00</span>
+                <div class="row">
+                    <div class="col-xs-12">
+                        Total: Php <span id="total">0.00</span>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="address1">Shipping Address:</label>
+                            <input id="address1" type="text" class="form-control" name="address1" value="{{ Auth::user()->shipping_address }}">
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
