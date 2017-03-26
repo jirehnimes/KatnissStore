@@ -25,6 +25,7 @@ Route::get('/products/{category}', 'ProductsController@display');
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('/home', 'HomeController');
 	Route::resource('/order', 'OrderController');
+	Route::get('/paypal/pay', 'OrderController@payPayPal');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {

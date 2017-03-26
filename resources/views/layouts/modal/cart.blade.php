@@ -1,5 +1,5 @@
 <div id="cartModal" class="modal modal-default fade" role="dialog">
-    <form action="{{ url('order') }}" method="POST">
+    <form id="cartForm" action="{{ url('order') }}" method="POST">
         <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
         <div class="modal-content">
             <div class="modal-header">
@@ -9,26 +9,28 @@
                 <h4 class="modal-title"><i class="fa fa-btn fa-shopping-cart"></i> Cart</h4>
             </div>
             <div class="modal-body">
-                <table id="tableCart" class="display table table-hover" cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Name</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Action</th>
-                        </tr>
-                    </tfoot>
-                </table>
+                <div class="table-responsive">
+                    <table id="tableCart" class="display table table-hover" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Action</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
                 <hr>
                 <div class="row">
                     <div class="col-xs-12">
@@ -36,14 +38,49 @@
                     </div>
                 </div>
                 <hr>
+                @if(Auth::user())
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="form-group">
-                            <label for="address1">Shipping Address:</label>
-                            <input id="address1" type="text" class="form-control" name="address1" value="{{ Auth::user()->shipping_address }}">
+                            <label for="shipAd">Shipping Address:</label>
+                            <input id="shipAd" type="text" class="form-control" name="shipAd" value="{{ Auth::user()->shipping_address }}">
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="phone">Phone:</label>
+                            <input id="phone" type="text" class="form-control" name="phone" value="">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="mobile">Mobile:</label>
+                            <input id="mobile" type="text" class="form-control" name="mobile" value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="fare">Fare Type:</label>
+                            <div id="fare">
+                                <label class="radio-inline"><input type="radio" name="fare" value="cash"><i class="fa fa-money"></i>&nbsp;Cash</label>
+                                <label class="radio-inline"><input type="radio" name="fare" value="paypal"><i class="fa fa-paypal"></i>&nbsp;Paypal</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="msg">Optional Message:</label>
+                            <textarea id="msg" type="text" class="form-control" name="msg"></textarea>
+                        </div>
+                    </div>
+                </div>
+                @endif
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>

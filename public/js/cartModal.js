@@ -36,6 +36,7 @@ $(function() {
         // Initialize datatable
         var cartTable = $('#tableCart').DataTable({
             processing: true,
+            responsive: true,
             ajax: oAjax,
             columns: [
                 {data: 'name', name: 'name'},
@@ -63,7 +64,8 @@ $(function() {
                 oThis.append('<input type="hidden" name="id[]" value="'+data.id+'">');
             },
             drawCallback: function(settings) {
-                calculateTotal();
+                oCartModal.find('#total').text(parseFloat(iAmtTotal).toFixed(2));
+                iAmtTotal = 0;
             }
         });
 
@@ -109,10 +111,9 @@ $(function() {
             cartTable.draw();
         });
 
-        function calculateTotal() {
-            oCartModal.find('#total').text(parseFloat(iAmtTotal).toFixed(2));
-            iAmtTotal = 0;
-        }
+        oCartModal.on('submit', '#cartForm', function(e) {
+            sessionStorage.removeItem('cart');
+        });
     } else {
         console.error('No web localstorage in this browser.');
     }

@@ -64,9 +64,8 @@
         .modal .modal-content {
             border-radius: 0;
             width: 50vw;
-            top: 50vh;
             left: 50vw;
-            transform: translate(-50%,-50%);
+            transform: translate(-50%,0);
         }
 
         .modal .modal-content .modal-header {
@@ -85,8 +84,21 @@
         @media screen and (max-width: 600px) {
             .modal .modal-content {
                 width: 100vw;
-                top: 0;
             }
+        }
+
+        .alert {
+            background-image: none;
+            border-radius: 0;
+            color: white;
+        }
+
+        .alert.alert-success {
+            background-color: #00a65a;
+        }
+
+        .alert.alert-danger {
+            background-color: #dd4b39;
         }
     </style>
 </head>

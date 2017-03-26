@@ -15,12 +15,16 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->integer('invoice_number');
+            $table->string('invoice_number');
             $table->enum('fare_type', ['cash', 'paypal']);
+            $table->decimal('amount', 11, 2);
             $table->string('shipping_address');
             $table->longText('message');
-            $table->date('delivery_start');
-            $table->date('delivery_end');
+            $table->string('paypal_id');
+            $table->string('paypal_info');
+            $table->integer('paid')->default(0);
+            $table->date('delivery_start')->default('0000-00-00 00:00:00');
+            $table->date('delivery_end')->default('0000-00-00 00:00:00');
             $table->enum('delivery_status', ['waiting', 'delivering', 'completed']);
             $table->timestamps();
         });
