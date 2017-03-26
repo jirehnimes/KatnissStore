@@ -68,6 +68,7 @@ $(function() {
 $aItems = array_chunk($aProds->items(), 3, true);
 @endphp
 
+@include('breadcrumb')
 <div class="container">
 	@if ($aProds->total() !== 0)
 		@foreach ($aItems as $aGroup)
@@ -88,7 +89,7 @@ $aItems = array_chunk($aProds->items(), 3, true);
 	    </div>
 	    @endforeach
     @else
-    	<h1>No available products.</h1>
+    	<h3><i class="fa fa-shopping-basket"></i>&nbsp;&nbsp;No available products.</h3>
     @endif
 </div>
 @endsection

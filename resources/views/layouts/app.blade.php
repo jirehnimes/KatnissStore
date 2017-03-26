@@ -55,10 +55,11 @@
         }
 
         div#breadcrumb {
+            background-color: white;
         }
 
         div#breadcrumb * {
-            color: white;
+            color: rgb(0, 62, 163);
         }
 
         .modal .modal-content {
