@@ -56,6 +56,7 @@
 
         div#breadcrumb {
             background-color: white;
+            margin-bottom: 20px;
         }
 
         div#breadcrumb * {
@@ -115,7 +116,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Katniss Store
+                    <img src="{{ asset('storage/images/logo.png') }}" alt="Katniss Store" style="height:100%;width:auto;">
                 </a>
             </div>
 

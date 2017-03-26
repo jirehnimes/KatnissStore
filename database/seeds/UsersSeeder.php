@@ -30,12 +30,16 @@ class UsersSeeder extends Seeder
         ));
 
         User::create(array(
-            'first_name' => 'Member',
-            'last_name'  => 'User',
-            'email'      => 'member@katniss.com',
-            'password'   => Hash::make('password'),
-            'birthdate'  => '2016-10-01',
-            'gender'     => 'f',
+            'first_name'       => 'Member',
+            'last_name'        => 'User',
+            'email'            => 'member@katniss.com',
+            'password'         => Hash::make('password'),
+            'birthdate'        => '2016-10-01',
+            'gender'           => 'f',
+            'address'          => '123 Test Address',
+            'shipping_address' => '123 Test Address',
+            'phone'            => '123-45-67'
+            'mobile'           => '09012345678'
         ));
 
     	Model::reguard();

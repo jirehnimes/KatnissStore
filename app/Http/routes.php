@@ -36,5 +36,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
 
 Route::group(['prefix' => 'datatables'], function () {
     Route::get('admin/product', ['as'=>'datatables.admin.product', 'uses'=>'Datatable\Admin\ProductController@all']);
+    Route::get('admin/order', ['as'=>'datatables.admin.order', 'uses'=>'Datatable\Admin\OrderController@all']);
     Route::get('product/cart',  ['as'=>'datatables.product.cart', 'uses'=>'Datatable\ProductController@cart']);
 });

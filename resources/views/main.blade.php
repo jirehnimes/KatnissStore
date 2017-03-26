@@ -8,10 +8,35 @@
 
 	.slider div {
 		height: 100%;
-		background-color: green;
-		padding: 10px;
-		color: white;
 	}
+
+    .slider div[class*="container"] {
+        height: 100%;
+        width: 100%;
+        background-repeat: no-repeat;
+        background-size: auto 100%;
+        text-align: right;
+        padding: 10px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+    }
+
+    .slider div.container1 {
+        background-image: url('storage/images/banner/h4-slide.png');
+    }
+
+    .slider div.container2 {
+        background-image: url('storage/images/banner/h4-slide2.png');
+    }
+
+    .slider div.container3 {
+        background-image: url('storage/images/banner/h4-slide3.png');
+    }
+
+    .slider .btn {
+        border-radius: 0;
+    }
 </style>
 
 <script type="text/javascript">
@@ -20,7 +45,7 @@
 			infinite: true,
 			dots: true,
 			speed: 300,
-			autoplay: true,
+			autoplay: true
 		});
     });
 </script>
@@ -31,13 +56,28 @@
         <div class="col-md-10 col-md-offset-1">
         	<div class="slider">
     			<div>
-    				<h1>Sample Content 1</h1>
+                    <div class="container1">
+                        <span>
+                            <h4>Get the latest smart phones here...</h4>
+                            <a href="products/Technology" class="btn btn-success btn-flat"><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Buy Now</a>
+                        </span>
+                    </div>
     			</div>
     			<div>
-    				<h1>Sample Content 2</h1>
+    				<div class="container2">
+                        <span>
+                            <h4>Cool bags?<br>Shop at Katniss Store!</h4>
+                            <a href="products/Bags" class="btn btn-success btn-flat"><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Buy Now</a>
+                        </span>
+                    </div>
     			</div>
     			<div>
-    				<h1>Sample Content 3</h1>
+    				<div class="container3">
+                        <span>
+                            <h4>Gadgets and more... more... more..</h4>
+                            <a href="products/Technology" class="btn btn-success btn-flat"><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Buy Now</a>
+                        </span>
+                    </div>
     			</div>
         	</div>
         </div>

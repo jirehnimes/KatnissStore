@@ -68,8 +68,8 @@ $(function() {
 $aItems = array_chunk($aProds->items(), 3, true);
 @endphp
 
-@include('breadcrumb')
 <div class="container">
+	@include('breadcrumb')
 	@if ($aProds->total() !== 0)
 		@foreach ($aItems as $aGroup)
 	    <div class="row">

@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <hr>
-                @if(Auth::user())
+                @if(Auth::user() && Auth::user()->is_admin == 0)
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="form-group">
@@ -84,7 +84,12 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                @if(!Auth::user())
+                <button type="button" class="btn btn-outline" data-dismiss="modal" data-toggle="modal" data-target="#loginModal">Log In</button>
+                @endif
+                @if(Auth::user() && Auth::user()->is_admin == 0)
                 <button type="submit" class="btn btn-outline">Checkout</button>
+                @endif
             </div>
         </div>
     </form>
