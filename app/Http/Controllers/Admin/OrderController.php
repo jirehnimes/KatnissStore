@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Order;
+
 class OrderController extends Controller
 {
     /**
@@ -71,7 +73,17 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $oRequest = $request->all();
+
+        $oOrder = Order::find($id);
+        $oOrder->paid = $oRequest['ispaid'];
+        $oOrder->delivery_status = $oRequest['delstatus'];
+
+        if ($oOrder->save()) {
+            return redirect('/admin/order')->with('ok', 'Order successfully updated.');
+        }
+
+        return redirect('/admin/order')->with('error', 'Order update failed.');
     }
 
     /**
