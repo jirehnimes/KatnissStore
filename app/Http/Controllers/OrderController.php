@@ -43,6 +43,10 @@ class OrderController extends Controller
     {
         $oRequest = $request->all();
         
+        if (isset($oRequest['fare']) === false) {
+            return redirect('/')->with('error', 'No fare type is selected.');
+        }
+
         $iTotal = $this->computeTotal($oRequest);
         $sInvoice = date('Ymdhis').'-'.str_random(8);
 
@@ -207,6 +211,7 @@ class OrderController extends Controller
         curl_setopt($oCurl, CURLOPT_HTTPHEADER, $aHeader);
         curl_setopt($oCurl, CURLOPT_POSTFIELDS, json_encode($aParams));
         curl_setopt($oCurl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($oCurl, CURLOPT_SSL_VERIFYPEER, false);
         $oRes = curl_exec($oCurl);
 
         curl_close($oCurl);
