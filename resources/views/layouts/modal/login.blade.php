@@ -91,16 +91,31 @@
                         <form action="{{ url(config('adminlte.register_url', 'register')) }}" method="post">
                             {!! csrf_field() !!}
 
-                            <div class="form-group has-feedback {{ $errors->has('name') ? 'has-error' : '' }}">
-                                <input type="text" name="name" class="form-control" value="{{ old('name') }}"
-                                       placeholder="{{ trans('adminlte::adminlte.full_name') }}">
+                            <!-- First Name -->
+                            <div class="form-group has-feedback {{ $errors->has('first_name') ? 'has-error' : '' }}">
+                                <input type="text" name="fname" class="form-control" value="{{ old('first_name') }}"
+                                       placeholder="First Name">
                                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                                @if ($errors->has('name'))
+                                @if ($errors->has('first_name'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('first_name') }}</strong>
                                     </span>
                                 @endif
                             </div>
+
+                            <!-- Last Name -->
+                            <div class="form-group has-feedback {{ $errors->has('last_name') ? 'has-error' : '' }}">
+                                <input type="text" name="lname" class="form-control" value="{{ old('last_name') }}"
+                                       placeholder="Last Name">
+                                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                                @if ($errors->has('last_name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('last_name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+                            <!-- Email -->
                             <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
                                 <input type="email" name="email" class="form-control" value="{{ old('email') }}"
                                        placeholder="{{ trans('adminlte::adminlte.email') }}">
@@ -111,8 +126,10 @@
                                     </span>
                                 @endif
                             </div>
+
+                            <!-- Password -->
                             <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}">
-                                <input type="password" name="password" class="form-control"
+                                <input type="password" name="pword" class="form-control"
                                        placeholder="{{ trans('adminlte::adminlte.password') }}">
                                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                                 @if ($errors->has('password'))
@@ -121,6 +138,8 @@
                                     </span>
                                 @endif
                             </div>
+
+                            <!-- Password Confirmation -->
                             <div class="form-group has-feedback {{ $errors->has('password_confirmation') ? 'has-error' : '' }}">
                                 <input type="password" name="password_confirmation" class="form-control"
                                        placeholder="{{ trans('adminlte::adminlte.retype_password') }}">
@@ -131,6 +150,19 @@
                                     </span>
                                 @endif
                             </div>
+
+                            <!-- Birthdate -->
+                            <div class="form-group has-feedback {{ $errors->has('last_name') ? 'has-error' : '' }}">
+                                <input type="text" name="lname" class="form-control" value="{{ old('last_name') }}"
+                                       placeholder="Last Name">
+                                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                                @if ($errors->has('last_name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('last_name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
                             <button type="submit"
                                     class="btn btn-primary btn-block btn-flat"
                             >{{ trans('adminlte::adminlte.register') }}</button>
@@ -138,7 +170,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>

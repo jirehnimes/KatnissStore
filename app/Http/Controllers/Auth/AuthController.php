@@ -43,12 +43,16 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'fname'  => 'required|max:255',
-            'lname'  => 'required|max:255',
-            'email'  => 'required|email|max:255|unique:users',
-            'pword'  => 'required|min:6|confirmed',
-            'bdate'  => 'required|date',
-            'gender' => 'required'
+            'fname'    => 'required|max:255',
+            'lname'    => 'required|max:255',
+            'email'    => 'required|email|max:255|unique:users',
+            'pword'    => 'required|min:6|confirmed',
+            'bdate'    => 'required|date',
+            'gender'   => 'required',
+            'address'  => 'required',
+            'saddress' => 'required',
+            'phone'    => 'required',
+            'mobile'   => 'required'
         ]);
     }
 
@@ -61,12 +65,16 @@ class AuthController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'first_name' => $data['fname'],
-            'last_name'  => $data['lname'],
-            'email'      => $data['email'],
-            'password'   => Hash::make($data['pword']),
-            'birthdate'  => $data['bdate'],
-            'gender'     => $data['gender']
+            'first_name'       => $data['fname'],
+            'last_name'        => $data['lname'],
+            'email'            => $data['email'],
+            'password'         => Hash::make($data['pword']),
+            'birthdate'        => $data['bdate'],
+            'gender'           => $data['gender'],
+            'address'          => $data['address'],
+            'shipping_address' => $data['saddress'],
+            'phone'            => $data['phone'],
+            'mobile'           => $data['mobile']
         ]);
     }
 

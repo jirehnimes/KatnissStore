@@ -12,7 +12,16 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name',
+        'first_name',
+        'email',
+        'password',
+        'birthdate',
+        'gender',
+        'address',
+        'shipping_address',
+        'phone',
+        'mobile',
     ];
 
     /**
@@ -21,7 +30,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     public function order()
