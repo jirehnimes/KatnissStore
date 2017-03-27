@@ -121,10 +121,15 @@ return [
         //     'label'       => 4,
         //     'label_color' => 'success',
         // ],
-        'RECORDS',
+        'DATA',
         [
             'text' => 'Orders',
             'url'  => 'admin/order',
+            'icon' => 'user',
+        ],
+        [
+            'text' => 'Category',
+            'url'  => 'admin/category',
             'icon' => 'user',
         ],
         [
