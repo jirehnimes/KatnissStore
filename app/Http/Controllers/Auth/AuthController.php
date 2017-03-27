@@ -48,11 +48,11 @@ class AuthController extends Controller
             'email'    => 'required|email|max:255|unique:users',
             'pword'    => 'required|min:6|confirmed',
             'bdate'    => 'required|date',
-            'gender'   => 'required',
-            'address'  => 'required',
-            'saddress' => 'required',
-            'phone'    => 'required',
-            'mobile'   => 'required'
+            // 'gender'   => 'required',
+            // 'address'  => 'required',
+            // 'saddress' => 'required',
+            // 'phone'    => 'required',
+            // 'mobile'   => 'required'
         ]);
     }
 

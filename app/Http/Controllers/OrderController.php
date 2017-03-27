@@ -128,7 +128,11 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+    }
+
+    public function transactions()
+    {
+        return view('transactions');
     }
 
     /**

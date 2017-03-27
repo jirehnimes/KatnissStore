@@ -152,13 +152,64 @@
                             </div>
 
                             <!-- Birthdate -->
-                            <div class="form-group has-feedback {{ $errors->has('last_name') ? 'has-error' : '' }}">
-                                <input type="text" name="lname" class="form-control" value="{{ old('last_name') }}"
-                                       placeholder="Last Name">
-                                <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                                @if ($errors->has('last_name'))
+                            <div class="form-group has-feedback {{ $errors->has('birthdate') ? 'has-error' : '' }}">
+                                <input type="date" name="bdate" class="form-control" value="{{ old('birthdate') }}"
+                                       placeholder="Birthdate">
+                                @if ($errors->has('birthdate'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('last_name') }}</strong>
+                                        <strong>{{ $errors->first('birthdate') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+                            <div class="form-group has-feedback {{ $errors->has('gender') ? 'has-error' : '' }}">
+                                <select name="gender" class="form-control" value="{{ old('gender') }}">
+                                    <option value="m">Male</option>
+                                    <option value="f">Female</option>
+                                </select>
+                                @if ($errors->has('gender'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('gender') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+                            <div class="form-group has-feedback {{ $errors->has('address') ? 'has-error' : '' }}">
+                                <input type="text" name="address" class="form-control"
+                                       placeholder="Address">
+                                @if ($errors->has('address'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('address') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+                            <div class="form-group has-feedback {{ $errors->has('shipping_address') ? 'has-error' : '' }}">
+                                <input type="text" name="saddress" class="form-control"
+                                       placeholder="Shipping Address">
+                                @if ($errors->has('shipping_address'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('shipping_address') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+                            <div class="form-group has-feedback {{ $errors->has('phone') ? 'has-error' : '' }}">
+                                <input type="text" name="phone" class="form-control"
+                                       placeholder="Phone">
+                                @if ($errors->has('phone'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('phone') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+                            <div class="form-group has-feedback {{ $errors->has('mobile') ? 'has-error' : '' }}">
+                                <input type="text" name="mobile" class="form-control"
+                                       placeholder="Mobile">
+                                @if ($errors->has('mobile'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('mobile') }}</strong>
                                     </span>
                                 @endif
                             </div>

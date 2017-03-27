@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('/home', 'HomeController');
 	Route::resource('/order', 'OrderController');
 	Route::get('/paypal/pay', 'OrderController@payPayPal');
+    Route::get('/transactions', 'OrderController@transactions');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
@@ -41,4 +42,5 @@ Route::group(['prefix' => 'datatables'], function () {
     Route::get('admin/category', ['as'=>'datatables.admin.category', 'uses'=>'Datatable\Admin\CategoryController@all']);
 
     Route::get('product/cart',  ['as'=>'datatables.product.cart', 'uses'=>'Datatable\ProductController@cart']);
+    Route::get('order',  ['as'=>'datatables.order', 'uses'=>'Datatable\OrderController@all']);
 });
